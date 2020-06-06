@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<h1>Choose Your Hackathon!</h1>
+<h3>Your Hackathon History:</h3>
+<ul>
+    {% for event in events %}
+    <li>{{ event[1] }}</li>
+    {% endfor %}
+</ul>
+<form method="POST">
+    <select class="form-control" id="exampleFormControlSelect1" name="hackathon">
+        {% for hack in hackathon %}
+            <option value="{{ hack }}">{{ hack }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Submit</button>
+</form>

@@ -1,0 +1,7 @@
+<script>
+
+    access_token = window.location.href.split("#access_token=")[1].split("&token_type=Bearer")[0];
+    // console.log(window.location.href.split("discord_id=")[1].split("#")[0])
+    d_id = window.location.href.split("discord_id=")[1].split("#")[0]
+    window.location.replace(`/oauth/authorized?access_token=${access_token}&d_id=${d_id}`)
+</script>
