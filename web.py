@@ -121,7 +121,7 @@ def current_hack_api(d_id):
     hacks = requests.get("https://mlh-events.now.sh/na-2020").json()
     for i in hacks:
         if i["name"] == hack[0][1]:
-            return jsonify(resp=f"Welcome to {i['name']}! The location is at {i['location']} (Due to COVID Pandemic, it's the timeframe). {i['name']} starts at {i['startDate']}, ends at {i['endDate']}. Be sure to checkin on their website also! Located at {i['url']}. Enjoy!\n{i['imageUrl']}")
+            return jsonify(resp=f"Welcome to {i['name']}! The location is at {i['location']} (Due to COVID Pandemic, it's the timeframe). {i['name']} starts at {i['startDate']}, ends at {i['endDate']}. Be sure to checkin on their website also! Located at {i['url']}. Enjoy!\n{i['imageUrl']}", hack=i["name"])
 
 
 if __name__ == "__main__":

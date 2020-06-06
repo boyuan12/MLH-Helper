@@ -1,6 +1,8 @@
 import discord
+import discord.utils
 from discord.ext import commands
 import requests
+import random
 
 client = discord.Client()
 
@@ -32,8 +34,20 @@ async def on_message(message):
             await message.channel.send(f"Oops, looks like you don't have permission to use this command!")
 
         elif resp == "finished":
-            resp = requests.get(f"{BASE_URL}/api/current_hack/{message.author.id}").json()["resp"]
-            await message.channel.send(resp)
+            resp = requests.get(f"{BASE_URL}/api/current_hack/{message.author.id}").json()
+
+            if resp["hack"] in [hack.name for hack in message.guild.roles] and resp["hack"] not in [y.name.lower() for y in message.author.roles]:
+                role = discord.utils.get(message.guild.roles, name=resp["hack"])
+                user = message.author
+                await user.add_roles(role)
+            else:
+                guild = message.guild
+                await guild.create_role(name=resp["hack"], colour=discord.Colour(0x00FF00))
+                role = discord.utils.get(message.guild.roles, name=resp["hack"])
+                user = message.author
+                await user.add_roles(role)
+
+            await message.channel.send(resp["resp"])
 
 
-client.run("NzE4NTAwOTk1Nzg4ODMyODkx.Xtpy1g.61iB7LnWwL82BgUBcvm0k2dRXfs")
+client.run("")
